@@ -1,10 +1,13 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { InputType, Field, Int, PartialType, ID } from '@nestjs/graphql';
 
-export class PriceDto {
-  @ApiPropertyOptional()
+@InputType()
+export class PriceDTO {
+  @Field(() => ID)
+  id?: string;
+
+  @Field()
   name: string;
 
-  @ApiPropertyOptional()
+  @Field()
   value: number;
-
 }
