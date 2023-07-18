@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { PriceDTO } from './dto/PriceDto';
+import { CreatePriceInput } from './dto/create-price-input';
 
 @Injectable()
 export class SynchronizerService {
-    fetchPrice(): PriceDTO {
-        return {name: 'BTCUSDT', value: 100};
+    fetchPrice(price): CreatePriceInput {
+        return price;
     }
 }

@@ -11,6 +11,12 @@ type Auth {
   user: User!
 }
 
+input CreatePriceInput {
+  btc: String
+  price: String!
+  usdt: String
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -27,6 +33,7 @@ input LoginInput {
 }
 
 type Mutation {
+  fetchPrice(Price: CreatePriceInput!): Synchronizer!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
   register(data: RegisterInput!): Auth!
@@ -42,6 +49,19 @@ input RegisterInput {
   firstName: String
   lastName: String
   password: String!
+}
+
+type Synchronizer {
+  btc: String
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  id: ID!
+  price: String!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime!
+  usdt: String
 }
 
 type Token {
