@@ -3,10 +3,12 @@ import { SynchronizerResolver } from './synchronizer.resolver';
 import { SynchronizerService } from './synchronizer.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SynchronizerRepository } from './repositories/synchronizer.repository';
+import { Synchronizer } from './models/synchronizer.model';
+import { SynchronizerEntity } from './entities/synchronizer.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([SynchronizerRepository])],
+    imports: [TypeOrmModule.forFeature([SynchronizerEntity])],
     providers: [SynchronizerResolver, SynchronizerService],
-    exports: [TypeOrmModule.forFeature([SynchronizerRepository])],
+    exports: [SynchronizerService],
 })
 export class SynchronizerModule {}
