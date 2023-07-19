@@ -1,4 +1,3 @@
-import { UserRepository } from './../../user/repositories/user.repository';
 import {
   Injectable,
   NotFoundException,
