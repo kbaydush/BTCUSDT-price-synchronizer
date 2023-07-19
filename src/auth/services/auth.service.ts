@@ -15,12 +15,16 @@ import { RegisterInput } from '../dto/register.input';
 import { Token } from '../models/token.model';
 import PostgresErrorCode from '../../database/enums/postgres-error-code.enum';
 import { User } from '../../user/models/user.model';
+import { UserEntity } from 'src/user/entities/user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly userRepository: UserRepository,
+    @InjectRepository(UserEntity)
+    private userRepository: Repository<UserEntity>,
     private readonly passwordService: PasswordService,
     private readonly configService: ConfigService,
   ) {}
@@ -31,10 +35,11 @@ export class AuthService {
     );
 
     try {
-      const user = await this.userRepository.createUser({
+      const user = this.userRepository.create({
         ...payload,
         password: hashedPassword,
       });
+      this.userRepository.save(user);
 
       return this.generateTokens({
         userId: user.id,

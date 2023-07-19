@@ -1,4 +1,3 @@
-import { UserRepository } from './../user/repositories/user.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
@@ -10,6 +9,7 @@ import { SecurityConfig } from 'src/common/configs/config.interface';
 import { GqlAuthGuard } from './guards/gql-auth.guard';
 import { AuthService } from './services/auth.service';
 import { PasswordService } from './services/password.service';
+import { UserEntity } from 'src/user/entities/user.entity';
 
 @Module({
   imports: [
@@ -26,7 +26,7 @@ import { PasswordService } from './services/password.service';
       },
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([UserRepository]),
+    TypeOrmModule.forFeature([UserEntity]),
   ],
   providers: [
     AuthService,
