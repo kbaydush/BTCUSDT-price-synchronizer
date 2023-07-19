@@ -11,4 +11,6 @@ export class CreatePriceInput extends PartialType(Synchronizer) {
   btc: string;
   @Field({ nullable: true })
   usdt: string;
+  @Field({ nullable: true })
+  change?: string;
 }

@@ -13,6 +13,7 @@ type Auth {
 
 input CreatePriceInput {
   btc: String
+  change: String
   price: String!
   usdt: String
 }

@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePriceInput } from './dto/create-price-input';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Synchronizer } from './models/synchronizer.model';
 import { Repository } from 'typeorm';
-import { SynchronizerRepository } from './repositories/synchronizer.repository';
 import { SynchronizerEntity } from './entities/synchronizer.entity';
 
 @Injectable()
@@ -17,6 +15,20 @@ export class SynchronizerService {
         return await this.syncRepository.save(newPrice);
     }
     async findAll(): Promise<CreatePriceInput[]> {
-        return await this.syncRepository.find();
+        const prices = await this.syncRepository.find();
+
+        const result = prices.reduce((acc, d) => {
+            const item = acc[acc.length-1];
+
+            if(item && item.price) {
+                const diff = Number(d.price) - Number(item.price);
+                const percent = Number(d.price) > Number(item.price) ? Number(d.price) / 100 : Number(item.price) / 100 ;
+                d['change'] = diff / percent;
+            }
+            acc.push(d);
+            return acc;
+        }, []);
+
+          return result;
     }
 }
