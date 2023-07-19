@@ -7,11 +7,11 @@ import { CreatePriceInput } from './dto/create-price-input';
 export class SynchronizerResolver {
   constructor(private readonly synchronizerService: SynchronizerService) {}
 
-  // @Query(() => Synchronizer, { name: 'user' })
-  // findOne(@Args('id', { type: () => Int }) id: string) {
-  //   return this.synchronizerService.findOne(id);
+  @Query(() => [Synchronizer], { name: 'synchronizer' })
+  findAll() {
+    return this.synchronizerService.findAll();
 
-  // }
+  }
 
   @Mutation(() => Synchronizer)
   fetchPrice(@Args('Price') createPriceInput: CreatePriceInput) {

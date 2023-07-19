@@ -16,4 +16,7 @@ export class SynchronizerService {
         const newPrice = this.syncRepository.create(price);
         return await this.syncRepository.save(newPrice);
     }
+    async findAll(): Promise<CreatePriceInput[]> {
+        return await this.syncRepository.find();
+    }
 }
