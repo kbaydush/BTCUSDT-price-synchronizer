@@ -23,7 +23,9 @@ export class SynchronizerService {
             if(item && item.price) {
                 const diff = Number(d.price) - Number(item.price);
                 const percent = Number(d.price) > Number(item.price) ? Number(d.price) / 100 : Number(item.price) / 100 ;
-                d['change'] = diff / percent;
+                d['change'] = (diff / percent).toFixed(2) + '%';
+            } else {
+                d['change'] = '0%';
             }
             acc.push(d);
             return acc;

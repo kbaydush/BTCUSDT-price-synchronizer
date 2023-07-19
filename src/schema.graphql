@@ -55,6 +55,7 @@ input RegisterInput {
 
 type Synchronizer {
   btc: String
+  change: String
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!

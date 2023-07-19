@@ -9,4 +9,6 @@ export class Synchronizer extends BaseModel {
   btc: string;
   @Field({ nullable: true })
   usdt: string;
+  @Field({ nullable: true })
+  change?: string;
 }
