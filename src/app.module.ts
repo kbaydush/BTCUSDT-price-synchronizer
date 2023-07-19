@@ -8,6 +8,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { GqlConfigService } from './gql-config.service';
 import { SynchronizerModule } from './synchronizer/synchronizer.module';
+import { CronModule } from './cron/cron.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -22,7 +24,9 @@ import { SynchronizerModule } from './synchronizer/synchronizer.module';
     AuthModule,
     UserModule,
     DatabaseModule,
-    SynchronizerModule
+    SynchronizerModule,
+    ScheduleModule.forRoot(),
+    CronModule,
   ],
   controllers: [],
   providers: [],

@@ -6,7 +6,7 @@ export class SynchronizerEntity extends BaseEntity {
   @Column()
   price: string;
   @Column()
-  btc: string;
+  symbol: string;
   @Column()
-  usdt: string;
+  change?: string;
 }

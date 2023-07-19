@@ -3,10 +3,11 @@ import { SynchronizerResolver } from './synchronizer.resolver';
 import { SynchronizerService } from './synchronizer.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SynchronizerEntity } from './entities/synchronizer.entity';
+import { BinanceService } from './binance.service';
 
 @Module({
     imports: [TypeOrmModule.forFeature([SynchronizerEntity])],
-    providers: [SynchronizerResolver, SynchronizerService],
-    exports: [SynchronizerService],
+    providers: [SynchronizerResolver, BinanceService, SynchronizerService],
+    exports: [SynchronizerService, BinanceService],
 })
 export class SynchronizerModule {}
