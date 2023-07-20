@@ -9,9 +9,9 @@ import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
-  @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlAuthGuard)
   @Query(() => User, { name: 'user' })
-  findOne(@Args('id', { type: () => Int }) id: string) {
+  findOneUser(@Args('id', { type: () => String }) id: string) {
     return this.userService.findOne(id);
   }
 
