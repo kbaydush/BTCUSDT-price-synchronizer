@@ -12,7 +12,7 @@ export class UserService {
   ) {}
   findOne(id: string) {
     return this.userRepository.findOne({
-      where: {id},
+      where: { id },
       order: { createdAt: 'DESC' },
     });
   }

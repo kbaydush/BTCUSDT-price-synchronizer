@@ -9,11 +9,10 @@ export type MockType<T> = {
   [P in keyof T]?: jest.Mock<{}>;
 };
 
-export const repositoryMockFactory: () => MockType<
-  Repository<UserEntity>
-> = jest.fn(() => ({
-  findOne: jest.fn((entity) => entity),
-}));
+export const repositoryMockFactory: () => MockType<Repository<UserEntity>> =
+  jest.fn(() => ({
+    findOne: jest.fn((entity) => entity),
+  }));
 
 describe('UserService', () => {
   let service: UserService;
@@ -36,10 +35,10 @@ describe('UserService', () => {
 
   it('should get user by id', async () => {
     const user = {
-      id: "123",
-      firstName: "Test",
-      lastName: "Test"
-    }
+      id: '123',
+      firstName: 'Test',
+      lastName: 'Test',
+    };
 
     repositoryMock.findOne.mockReturnValue(user);
 
