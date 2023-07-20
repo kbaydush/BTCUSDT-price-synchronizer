@@ -15,5 +15,4 @@ export class BaseEntity {
 
   @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
-
 }

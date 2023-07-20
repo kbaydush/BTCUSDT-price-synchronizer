@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import fetch from 'node-fetch';
 
 export interface ResultInfo {
@@ -8,14 +9,15 @@ export interface ResultInfo {
 
 @Injectable()
 export class BinanceService {
-  private readonly BINANCE_API_URL = 'https://api.binance.com';
-  private readonly DEFAULT_SYMBOL = 'BTCUSDT';
+  constructor(private configService: ConfigService) {}
 
   public async fetchData(
-    symbol = this.DEFAULT_SYMBOL,
+    symbol = this.configService.get<string>('DEFAULT_SYMBOL'),
   ): Promise<ResultInfo> {
-    return fetch(
-      `${this.BINANCE_API_URL}/api/v3/ticker/price?symbol=${symbol}`,
+    return await fetch(
+      `${this.configService.get<string>(
+        'BINANCE_API_URL',
+      )}/api/v3/ticker/price?symbol=${symbol}`,
     ).then((res) => res.json());
   }
 }

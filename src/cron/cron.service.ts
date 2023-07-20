@@ -14,17 +14,13 @@ export class CronService {
 
   @Cron(CronExpression.EVERY_SECOND)
   async handleCron(): Promise<void> {
-    this.logger.debug(`\n### STARTED FETCH ###`);
+    this.logger.debug(`\n### FETCH REQUEST ###`);
     try {
       const res = await this.binanceService.fetchData();
-      await this.synchronizerService.saveRates([res]);
+      await this.synchronizerService.saveRates(res);
     } catch (error) {
-      this.logger.debug(
-        'Request error',
-        error,
-      );
+      this.logger.debug('Request error', error);
     }
-
     this.logger.debug(`\n### FINISHED ###`);
   }
 }
