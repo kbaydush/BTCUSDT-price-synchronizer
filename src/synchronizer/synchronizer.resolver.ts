@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { SynchronizerService } from './synchronizer.service';
 import { Synchronizer } from './models/synchronizer.model';
 import { UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from 'src/auth/guards/gql-auth.guard';
+import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
 
 @Resolver(() => Synchronizer)
 export class SynchronizerResolver {
@@ -10,7 +10,7 @@ export class SynchronizerResolver {
 
   @UseGuards(GqlAuthGuard)
   @Query(() => Synchronizer)
-  async getCurrentExchangeRate(): Promise<Synchronizer> {
+  async getLatestExchangeRate(): Promise<Synchronizer> {
     return this.synchronizerService.getLatestExchangeRate();
   }
 

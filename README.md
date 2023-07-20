@@ -26,7 +26,7 @@ Then run following commands:
 
 ```bash
 # install dependencies
-$ npm install
+$ npm install 
 
 # start docker services (only database for now)
 $ docker-compose up -d
@@ -51,8 +51,40 @@ $ npm run start:prod
 # unit tests
 $ npm run test
 
+# e2e tests
+$ npm run test:e2e
+
 # test coverage
 $ npm run test:cov
 ```
 
+## Requests Example
+
+Go to [GraphQl tool](http://localhost:3000/graphql)
+
+1. Register The user
+
+```
+mutation {
+  register(
+    data: {
+      email: 
+      password: 
+     	firstName:
+      lastName: 
+    }
+  ) {
+    accessToken
+    refreshToken
+    
+  }
+}
+```
+2. Take the accessToken from response and provide it to the request headers
+
+```
+ headers: {
+      Authorization: "Bearer token"
+} 
+```
 

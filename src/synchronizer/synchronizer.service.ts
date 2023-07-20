@@ -16,19 +16,25 @@ export class SynchronizerService {
     exchangeRate: ExchangeRateDto,
   ): Promise<SynchronizerEntity> {
     const latestRate = await this.getLatestExchangeRate();
-
     const entity = new SynchronizerEntity();
-    entity.symbol = exchangeRate.symbol;
-    entity.price = exchangeRate.price;
-    const diff = Number(exchangeRate.price) - Number(latestRate.price);
-    const percent =
-      Number(exchangeRate.price) > Number(latestRate.price)
-        ? Number(exchangeRate.price) / 100
-        : Number(latestRate.price) / 100;
-    entity.change = (diff / percent).toFixed(8) + '%';
+    if(latestRate) {
+        entity.symbol = exchangeRate.symbol;
+        entity.price = exchangeRate.price;
+        const diff = Number(exchangeRate.price) - Number(latestRate.price);
 
-    if (entity.price !== latestRate.price) {
-      this.syncRepository.save(entity);
+        const percent =
+        Number(exchangeRate.price) > Number(latestRate.price)
+            ? Number(exchangeRate.price) / 100
+            : Number(latestRate.price) / 100;
+        entity.change = (diff / percent).toFixed(8) + '%';
+        if (entity.price !== latestRate.price) {
+            this.syncRepository.save(entity);
+        }
+    } else {
+        entity.symbol = exchangeRate.symbol;
+        entity.price = exchangeRate.price;
+        entity.change = '0%';
+        this.syncRepository.save(entity);
     }
     return entity;
   }

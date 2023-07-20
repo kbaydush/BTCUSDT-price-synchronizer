@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './models/user.model';
 import { UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from 'src/auth/guards/gql-auth.guard';
+import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
 
 @Resolver(() => User)
 export class UserResolver {

@@ -1,4 +1,4 @@
-import { SecurityConfig } from 'src/common/configs/config.interface';
+import { SecurityConfig } from '../common/configs/config.interface';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
@@ -20,6 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: JwtDto): Promise<UserEntity> {
+    console.log(payload, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
     const user = await this.authService.validateUser(payload.userId);
     if (!user) {
       throw new UnauthorizedException();

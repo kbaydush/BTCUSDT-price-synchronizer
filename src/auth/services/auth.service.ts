@@ -9,12 +9,12 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PasswordService } from './password.service';
-import { SecurityConfig } from 'src/common/configs/config.interface';
+import { SecurityConfig } from '../../common/configs/config.interface';
 import { RegisterInput } from '../dto/register.input';
 import { Token } from '../models/token.model';
 import PostgresErrorCode from '../../database/enums/postgres-error-code.enum';
 import { User } from '../../user/models/user.model';
-import { UserEntity } from 'src/user/entities/user.entity';
+import { UserEntity } from '../../user/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 

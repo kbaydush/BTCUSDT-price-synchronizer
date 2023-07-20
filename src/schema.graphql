@@ -34,8 +34,8 @@ type Mutation {
 }
 
 type Query {
-  getCurrentExchangeRate: Synchronizer!
   getExchangeRateHistory: [Synchronizer!]!
+  getLatestExchangeRate: Synchronizer!
   user(id: Int!): User!
 }
 

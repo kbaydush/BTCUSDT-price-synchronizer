@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { CronService } from './cron.service';
-import { SynchronizerModule } from 'src/synchronizer/synchronizer.module';
+import { SynchronizerModule } from '../synchronizer/synchronizer.module';
 
 @Module({
   imports: [SynchronizerModule],
